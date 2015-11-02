@@ -8,6 +8,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support.ui import WebDriverWait
+from distutils import dir_util
+from selenium.webdriver.common.proxy import ProxyType
+
 import sys
 sys.path.append("/public")
 from public import *
@@ -18,7 +21,10 @@ class O2O_sign_up(unittest.TestCase):
 
     #初始化
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        #配置火狐各人文件
+        profile = webdriver.FirefoxProfile(r"Q:\firefoxx")
+        #制定火狐浏览器
+        self.driver = webdriver.Firefox(profile)
         time.sleep(3)
         self.base_url = "http://172.20.135.45"
         self.verificationErrors = []
