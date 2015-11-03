@@ -1,29 +1,27 @@
-#-*-coding: utf-8-*-
+#-*-coding=utf-8-*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-import  HTMLTestRunner
-import sys
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.support.ui import WebDriverWait
+from distutils import dir_util
+from selenium.webdriver.common.proxy import ProxyType
+
+import sys
 sys.path.append("/public")
 from public import *
-import unittest,time,re
+import unittest,time
+from O2O_test import *
 
 
-class O2O_sign_in(unittest.TestCase):
+class AAA(unittest.TestCase):
 
-    #初始化
     def setUp(self):
         setUp.setUp_profile(self)
 
-    def test_sign_in(self):
-        driver = self.driver
-        sign_in.sign_in(self)
-
-
-#运行
 if __name__ == "__main__":
     unittest.main()
-

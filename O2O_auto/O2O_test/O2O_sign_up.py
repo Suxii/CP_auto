@@ -21,14 +21,8 @@ class O2O_sign_up(unittest.TestCase):
 
     #初始化
     def setUp(self):
-        #配置火狐各人文件
-        profile = webdriver.FirefoxProfile(r"Q:\firefoxx")
-        #制定火狐浏览器
-        self.driver = webdriver.Firefox(profile)
-        time.sleep(3)
-        self.base_url = "http://172.20.135.45"
-        self.verificationErrors = []
-        self.accept_next_alert = True
+        setUp.setUp_profile()
+
     #进入注册流程
     def test_sign_up(self):
         driver = self.driver
@@ -53,6 +47,7 @@ class O2O_sign_up(unittest.TestCase):
         except:
             print u"注册出现错误"
         finally: pass
+
 
 #运行
 if __name__ == "__main__":
