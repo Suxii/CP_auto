@@ -5,7 +5,7 @@ import unittest, time
 def sign_in(self):
     driver = self.driver
     driver.get(self.base_url + "/")
-    driver.set_window_size(360,700)
+    driver.set_window_size(380,700)
     driver.implicitly_wait(5)
 
     #进入个人中心
