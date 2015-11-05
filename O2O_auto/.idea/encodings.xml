@@ -7,10 +7,10 @@
     <file url="file://$PROJECT_DIR$/O2O_test/__init__.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/O2O_test/category_order.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/O2O_test/index_order.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/O2O_test/inventory_check.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/O2O_test/public/__init__.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/O2O_test/public/sign_in.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/O2O_test/public/sign_up.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/all_tests.py" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../hahaha.py" charset="UTF-8" />
   </component>
 </project>

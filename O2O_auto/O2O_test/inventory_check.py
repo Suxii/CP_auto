@@ -17,43 +17,43 @@ from public import *
 import unittest,time
 
 
-class O2O_index_order(unittest.TestCase):
+class O2O_category_order(unittest.TestCase):
 
     #初始化
     def setUp(self):
         setUp.setUp_profile(self)
 
-    def test_index_order(self):
+    def test_category_order(self):
         driver = self.driver
         sign_in.sign_in(self)
 
         #清空购物车
         clean_cart.clean_cart(self)
 
-        #启动首页订货流程
-        driver.execute_script("$('#nav-bottom li:eq(0)').click()")
-        print u"进入首页"
-        time.sleep(2)
+        #启动类目订货流程
+        driver.execute_script("$('#nav-bottom li:eq(1)').click()")
+        print u"进入类目"
+        time.sleep(1)
 
-
-        #选择秒杀栏前N个商品：
-        for i in range(1):
-            driver.execute_script("$('#swiper-seckill img:eq(%s)').click()"%(i)) #进入商品
-            driver.implicitly_wait(5)
-            # driver.execute_script("$('#footer-bar a:eq(0)').click()") #立即购买
+        cate_num = str(driver.execute_script("return $('#left-menu li').length"))
+        print u"当前共有%s条分类" %(cate_num)
+        #循环执行类目
+        for i in range(int(cate_num)):
+            driver.execute_script("$('#left-menu li:eq(%s)').click()"%(i))
+            ii = str(i+1)
+            print u"进入第%s条分类..." %(ii)
+            time.sleep(0.2)
+            g_num = str(driver.execute_script(" return $('#cate-content li').length"))
+            print u"当前分类下共有%s种商品" %(g_num)
+            #默认选择每个分类下第一个商品
+            # driver.execute_script("$('#cate-content li:eq(0)').click()")
+            driver.find_element_by_xpath("//div[@id='cate-content']//li").click()
+            time.sleep(0.3)
             driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
+            print u"选择该分类下第一个商品加入购物车"
             driver.back() #后退
-        time.sleep(0.3)
-
-        #选择分会场的前N个商品：
-        driver.find_element_by_xpath("//div[@id='swiper-street1']/div/div/img").click()
-        driver.implicitly_wait(5)
-        # driver.execute_script("$('#footer-bar a:eq(0)').click()") #立即购买
-        driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
-        driver.back() #后退
-        time.sleep(0.3)
-
-        print u"加入购物车完成"
+            time.sleep(0.3)
+            print u"加入购物车完成"
 
         #进入购物车
         driver.execute_script("$('#nav-bottom li:eq(2)').click()")
@@ -76,15 +76,5 @@ class O2O_index_order(unittest.TestCase):
         payfor.payfor(self)
 
 
-
-        # for i in range(1):
-        #     # driver.find_element_by_xpath("//div[@id='swiper-seckill']/div/div[(%s)]/img"%(i)).click()
-        #     # driver.find_element_by_xpath("//div[@id='swiper-seckill']/div[@class='swiper-wrapper']/div[%s]"%(i)).click()
-        #     driver.execute_script("$('div#swiper-seckill div.swiper-wrapper>div:eq(%s)').click()"%(i))
-        #     driver.implicitly_wait(5)
-        #     driver.find_element_by_xpath(u"//[contains(text(),'加入购物车')]").click()
-        #     time.sleep(0.2)
-        #     driver.navigate().back()
-        #     i = i + 1
 
 

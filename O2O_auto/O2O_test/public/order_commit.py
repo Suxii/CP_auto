@@ -25,4 +25,17 @@ def order_commit(self):
     #提交结算订单
     print u"提交结算订单"
     driver.find_element_by_xpath("//button[@id='gotopay']").click()
+
+    try:
+        t = 1
+        while True:
+            time.sleep(0.1)
+            t = t + 1
+            if driver.execute_script("$('.app-notify').text() == '库存不足辣~'") or t == 10:
+                fault = str(driver.execute_script("return $('.app-notify').text()"))
+                print u"报错:" + fault
+                break
+    except:
+        print u"提交结算订单成功"
+
     time.sleep(0.25)

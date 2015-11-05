@@ -51,9 +51,22 @@ class O2O_category_order(unittest.TestCase):
             time.sleep(0.3)
             driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
             print u"选择该分类下第一个商品加入购物车"
+            #错误检测
+            try:
+                t = 1
+                while True:
+                    time.sleep(0.1)
+                    t = t + 1
+                    if driver.execute_script("$('.app-notify').text() == '被抢光辣,麻烦亲再看看其它宝贝吧~'") or t == 10:
+                        fault = driver.execute_script("$('.app-notify').text()")
+                        print u"报错:" + fault
+                        break
+            except:
+                print u"加入购物车成功"
+
+
             driver.back() #后退
             time.sleep(0.3)
-            print u"加入购物车完成"
 
         #进入购物车
         driver.execute_script("$('#nav-bottom li:eq(2)').click()")
