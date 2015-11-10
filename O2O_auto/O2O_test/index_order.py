@@ -32,28 +32,47 @@ class O2O_index_order(unittest.TestCase):
 
         #启动首页订货流程
         driver.execute_script("$('#nav-bottom li:eq(0)').click()")
-        print u"进入首页"
+        print u"====================进入首页===================="
         time.sleep(2)
 
 
         #选择秒杀栏前N个商品：
-        for i in range(1):
+        print u"选择秒杀栏前N个商品"
+        for i in range(1):#选择前两个商品
             driver.execute_script("$('#swiper-seckill img:eq(%s)').click()"%(i)) #进入商品
             driver.implicitly_wait(5)
-            # driver.execute_script("$('#footer-bar a:eq(0)').click()") #立即购买
+            cart_num = int(driver.execute_script("return $('#shopCartNums').text()")) #记录操作之前的购物车数量
             driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
+            time.sleep(0.1)
+            buy_scan.buy_scan(self,1,cart_num)
             driver.back() #后退
         time.sleep(0.3)
 
-        #选择分会场的前N个商品：
-        driver.find_element_by_xpath("//div[@id='swiper-street1']/div/div/img").click()
-        driver.implicitly_wait(5)
-        # driver.execute_script("$('#footer-bar a:eq(0)').click()") #立即购买
-        driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
-        driver.back() #后退
+        #选择1元购的前N个商品：
+        print u"选择1元购的前N个商品"
+        for i in range(1):#选择前两个商品
+            driver.execute_script("$('#swiper-street1 .swiper-slide:eq(%s)' img).click()"%(i)) #进入商品
+            driver.implicitly_wait(5)
+            cart_num = int(driver.execute_script("return $('#shopCartNums').text()")) #记录操作之前的购物车数量
+            driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
+            time.sleep(0.1)
+            buy_scan.buy_scan(self,1,cart_num)
+            driver.back() #后退
         time.sleep(0.3)
 
-        print u"加入购物车完成"
+        #选择答题购的前N个商品：
+        print u"选择答题购的前N个商品"
+        for i in range(1):#选择前两个商品
+            driver.execute_script("$('#swiper-street2 .swiper-slide:eq(%s)' img).click()"%(i)) #进入商品
+            driver.implicitly_wait(5)
+            cart_num = int(driver.execute_script("return $('#shopCartNums').text()")) #记录操作之前的购物车数量
+            driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
+            time.sleep(0.1)
+            buy_scan.buy_scan(self,1,cart_num)
+            driver.back() #后退
+        time.sleep(0.3)
+
+        print u"添加商品操作完成"
 
         #进入购物车
         driver.execute_script("$('#nav-bottom li:eq(2)').click()")
@@ -75,16 +94,10 @@ class O2O_index_order(unittest.TestCase):
         print u"转到支付"
         payfor.payfor(self)
 
+        #退出
+        quit_close.quit_close(self)
 
-
-        # for i in range(1):
-        #     # driver.find_element_by_xpath("//div[@id='swiper-seckill']/div/div[(%s)]/img"%(i)).click()
-        #     # driver.find_element_by_xpath("//div[@id='swiper-seckill']/div[@class='swiper-wrapper']/div[%s]"%(i)).click()
-        #     driver.execute_script("$('div#swiper-seckill div.swiper-wrapper>div:eq(%s)').click()"%(i))
-        #     driver.implicitly_wait(5)
-        #     driver.find_element_by_xpath(u"//[contains(text(),'加入购物车')]").click()
-        #     time.sleep(0.2)
-        #     driver.navigate().back()
-        #     i = i + 1
-
+#运行
+if __name__ == "__main__":
+    unittest.main()
 

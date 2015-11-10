@@ -14,7 +14,10 @@ if __name__ == "__main__":
 #酱测试用例加入测试容器
 alltestnames = [
     O2O_sign_up.O2O_sign_up,
-    O2O_sign_in.O2O_sign_in
+    O2O_sign_in.O2O_sign_in,
+    index_order.O2O_index_order,
+    category_order.O2O_category_order,
+    perfer_order.O2O_perfer_order
     ]
 for test in alltestnames:
     testunit.addTest(unittest.makeSuite(test))

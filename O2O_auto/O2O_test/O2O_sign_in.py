@@ -22,6 +22,8 @@ class O2O_sign_in(unittest.TestCase):
         driver = self.driver
         sign_in.sign_in(self)
 
+        #退出
+        quit_close.quit_close(self)
 
 #运行
 if __name__ == "__main__":

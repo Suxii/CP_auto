@@ -37,12 +37,18 @@ class O2O_AAA_order(unittest.TestCase):
 
         cate_num = str(driver.execute_script("return $('#left-menu li').length"))
         print u"当前共有%s条分类" %(cate_num)
-        #选择小米手环
+        #进入类目
         driver.execute_script("$('#left-menu li:eq(1)').click()")
         time.sleep(0.2)
+
+        #进入商品详情
         # driver.find_element_by_xpath("//div[@id='cate-content']//li").click()
         driver.execute_script("$('#cate-content li:eq(1) div').click()")
         time.sleep(0.3)
+
+        cart_num = str(driver.execute_script("return $('#shopCartNums')")) #记录操作之前的购物车数量
+        goods_num = 1 #购买商品数量默认为 1
+
         driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
         print u"选择小米手环加入购物车"
         #错误检测
@@ -51,9 +57,15 @@ class O2O_AAA_order(unittest.TestCase):
             while True:
                 time.sleep(0.1)
                 t = t + 1
+                #检测库存不足
                 if driver.execute_script("$('.app-notify').text() == '被抢光辣,麻烦亲再看看其它宝贝吧~'") or t == 20:
-                    fault = driver.execute_script("return $('.app-notify').text()")
-                    print "--------*--------error:" + fault + "--------*--------"
+                    fault0 = driver.execute_script("return $('.app-notify').text()")
+                    print "--------*--------error:" + fault0+ "--------*--------"
+
+                #检测购物车数量异常
+                if str(driver.execute_script("return $('#shopCartNums')")) == cart_num + goods_num:
+                    fault1 = str("加入购物车数量异常")
+                    print "--------*--------error:" + fault1 + "--------*--------"
                     break
         except:
             print u"加入购物车成功"

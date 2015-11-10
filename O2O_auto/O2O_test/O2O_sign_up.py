@@ -21,7 +21,7 @@ class O2O_sign_up(unittest.TestCase):
 
     #初始化
     def setUp(self):
-        setUp.setUp_profile()
+        setUp.setUp_profile(self)
 
     #进入注册流程
     def test_sign_up(self):
@@ -48,6 +48,8 @@ class O2O_sign_up(unittest.TestCase):
             print u"注册出现错误"
         finally: pass
 
+        #退出
+        quit_close.quit_close(self)
 
 #运行
 if __name__ == "__main__":

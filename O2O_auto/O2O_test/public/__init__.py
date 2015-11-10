@@ -5,3 +5,6 @@ import add_address
 import payfor
 import order_commit
 import clean_cart
+import allpick_add
+import buy_scan
+import quit_close
