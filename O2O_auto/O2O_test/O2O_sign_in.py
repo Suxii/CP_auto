@@ -1,15 +1,9 @@
 #-*-coding: utf-8-*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-import  HTMLTestRunner
 import sys
-from selenium.webdriver.support.ui import WebDriverWait
+
 sys.path.append("/public")
 from public import *
-import unittest,time,re
+import unittest
 
 
 class O2O_sign_in(unittest.TestCase):

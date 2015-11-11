@@ -1,19 +1,9 @@
 #-*-coding=utf-8-*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.support.ui import WebDriverWait
-from distutils import dir_util
-from selenium.webdriver.common.proxy import ProxyType
 import random
-
 import sys
-import unittest,time
+import unittest
+import time
+from selenium.webdriver.support.ui import WebDriverWait
 sys.path.append("/public")
 from public import *
 
@@ -24,7 +14,7 @@ class O2O_perfer_order(unittest.TestCase):
     def setUp(self):
         setUp.setUp_profile(self)
 
-    def test_perfer_orderr(self):
+    def test_perfer_order(self):
         driver = self.driver
         sign_in.sign_in(self)
 
@@ -44,7 +34,7 @@ class O2O_perfer_order(unittest.TestCase):
         #在推荐商品中随机取一件下单
         x = random.randint(0,g_recommend-1)
         print u"随机选取一件推荐商品下单"
-        driver.execute_script("$('#g-recommend .swiper-slide:eq(%s)').click()"%(x))
+        driver.execute_script("$('#g-recommend .swiper-slide:eq(%s) img').click()"%(x))
         print u"进入商品详情成功"
         time.sleep(0.3)
 
@@ -55,12 +45,10 @@ class O2O_perfer_order(unittest.TestCase):
         time.sleep(0.3)
 
         #提交订单
-        print u"====转入订单结算===="
         order_commit.order_commit(self)
         time.sleep(1)
 
         #确认支付
-        print u"====转到支付===="
         payfor.payfor(self)
 
         #退出

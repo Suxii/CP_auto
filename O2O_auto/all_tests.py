@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
 #酱测试用例加入测试容器
 alltestnames = [
-    O2O_sign_up.O2O_sign_up,
+    # O2O_sign_up.O2O_sign_up,
     O2O_sign_in.O2O_sign_in,
     index_order.O2O_index_order,
     category_order.O2O_category_order,
@@ -25,11 +25,11 @@ for test in alltestnames:
 #取执行时间
 now= time.strftime(u"%Y-%m-%d  %H.%M.%S", time.localtime())
 #定义测试报告的存放路径，支持相对路路径
-cur_dir = "D:\\autotest\\report"
+cur_dir = "Q:\\workarea\\O2O_auto\\report"
 folder_name = now+u"测试报告"
 if os.path.isdir(cur_dir):
     os.mkdir(os.path.join(cur_dir,folder_name))
-    ad = "D:\\autotest\\report\\"+folder_name
+    ad = "Q:\\workarea\\O2O_auto\\report\\"+folder_name
     os.chdir(ad)
     filename = (now+'_result.html')
     fp = file(filename, 'wb')
@@ -37,7 +37,7 @@ if os.path.isdir(cur_dir):
 #定义测试报告
 runner = HTMLTestRunner.HTMLTestRunner(
     stream = fp,
-    title = u'CP自动化用例测试报告',
+    title = u'O2O自动化用例测试报告',
     description = u'用例执行情况:')
 
 #运行测试用例

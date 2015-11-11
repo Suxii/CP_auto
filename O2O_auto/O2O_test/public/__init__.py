@@ -1,10 +1,8 @@
 import setUp
 import sign_in
 import sign_up
-import add_address
-import payfor
-import order_commit
-import clean_cart
-import allpick_add
-import buy_scan
-import quit_close
+import print_color
+#------------------------------------------------------------------
+from O2O_test.public.Action import *
+#------------------------------------------------------------------
+from O2O_test.public.Assert import *

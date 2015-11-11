@@ -1,11 +1,8 @@
 #-*- coding: utf-8 -*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-import unittest, time
-import buy_scan
+import time
+
+from O2O_test.public.Assert import buy_scan
+
 
 #所有类目商品加入购物车，使用前必须在可以点击类目的界面
 #启动类目订货流程
@@ -35,7 +32,7 @@ def allpick_add(self):
             time.sleep(0.3)
             driver.execute_script("$('#cate-content li:eq(%s) div').click()"%(n))
             #参数
-            cart_num = int(driver.execute_script("return $('#shopCartNums').text()")) #记录操作之前的购物车数量
+            cart_num = int(driver.execute_script("return $('#shopCartNums').text()"))
             goods_num = 1 #购买商品数量默认为 1
             time.sleep(0.3)
 

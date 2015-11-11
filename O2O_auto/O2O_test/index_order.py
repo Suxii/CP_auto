@@ -1,17 +1,7 @@
 #-*-coding=utf-8-*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.support.ui import WebDriverWait
-from distutils import dir_util
-from selenium.webdriver.common.proxy import ProxyType
-
 import sys
+
+from selenium.webdriver.support.ui import WebDriverWait
 sys.path.append("/public")
 from public import *
 import unittest,time
@@ -29,6 +19,9 @@ class O2O_index_order(unittest.TestCase):
 
         #清空购物车
         clean_cart.clean_cart(self)
+
+        #清空待付款
+        clean_waitPay.clean_waitPay(self)
 
         #启动首页订货流程
         driver.execute_script("$('#nav-bottom li:eq(0)').click()")
@@ -51,7 +44,7 @@ class O2O_index_order(unittest.TestCase):
         #选择1元购的前N个商品：
         print u"选择1元购的前N个商品"
         for i in range(1):#选择前两个商品
-            driver.execute_script("$('#swiper-street1 .swiper-slide:eq(%s)' img).click()"%(i)) #进入商品
+            driver.execute_script("$('#swiper-street1 .swiper-slide:eq(%s) img').click()"%(i)) #进入商品
             driver.implicitly_wait(5)
             cart_num = int(driver.execute_script("return $('#shopCartNums').text()")) #记录操作之前的购物车数量
             driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
@@ -63,7 +56,7 @@ class O2O_index_order(unittest.TestCase):
         #选择答题购的前N个商品：
         print u"选择答题购的前N个商品"
         for i in range(1):#选择前两个商品
-            driver.execute_script("$('#swiper-street2 .swiper-slide:eq(%s)' img).click()"%(i)) #进入商品
+            driver.execute_script("$('#swiper-street2 .swiper-slide:eq(%s) img').click()"%(i)) #进入商品
             driver.implicitly_wait(5)
             cart_num = int(driver.execute_script("return $('#shopCartNums').text()")) #记录操作之前的购物车数量
             driver.execute_script("$('#footer-bar a:eq(1)').click()") #加入购物车
@@ -82,16 +75,12 @@ class O2O_index_order(unittest.TestCase):
 
         #结算
         print u"进行结算"
-        driver.find_element_by_xpath("//button[@id='gotopay']").click()
-        WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath("//button[@id='gotopay']"))
-
+        driver.execute_script("$('button#gotopay').click()")#点击按钮
         #提交订单
-        print u"转入订单结算"
         order_commit.order_commit(self)
         time.sleep(1)
 
         #确认支付
-        print u"转到支付"
         payfor.payfor(self)
 
         #退出

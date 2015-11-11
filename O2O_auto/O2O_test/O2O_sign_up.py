@@ -1,20 +1,10 @@
 #-*-coding=utf-8-*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.support.ui import WebDriverWait
-from distutils import dir_util
-from selenium.webdriver.common.proxy import ProxyType
-
 import sys
+
+from selenium.webdriver.support.ui import WebDriverWait
 sys.path.append("/public")
 from public import *
-import unittest,time
+import unittest
 
 
 class O2O_sign_up(unittest.TestCase):

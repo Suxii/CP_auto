@@ -1,22 +1,16 @@
 #-*-coding=utf-8-*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver.support.ui import WebDriverWait
-from distutils import dir_util
-from selenium.webdriver.common.proxy import ProxyType
-
 import sys
-import unittest,time
+import unittest
+import time
+
+from selenium.webdriver.support.ui import WebDriverWait
+
 sys.path.append("/public")
 from public import *
 
-
+##############################################################################
+# 采用遍历的方式对类目中的每项商品订货，采用加入购物车的方式，然后一起结算
+##############################################################################
 
 class O2O_category_order(unittest.TestCase):
   # 初始化
@@ -30,6 +24,9 @@ class O2O_category_order(unittest.TestCase):
         #清空购物车
         clean_cart.clean_cart(self)
 
+        #清空待付款
+        clean_waitPay.clean_waitPay(self)
+
         #选择类目中所有商品加入购物车
         allpick_add.allpick_add(self)
 
@@ -40,17 +37,15 @@ class O2O_category_order(unittest.TestCase):
         print u"合计金额为 " + payment
 
         #结算
-        print u"====进行结算===="
+        print u"结算购物车"
         driver.find_element_by_xpath("//button[@id='gotopay']").click()
-        WebDriverWait(driver, 10).until(lambda x: x.find_element_by_xpath("//button[@id='gotopay']"))
+        settle_scan.settle_scan(self)
+        time.sleep(0.3)
 
-        #提交订单
-        print u"====转入订单结算===="
         order_commit.order_commit(self)
-        time.sleep(1)
+        time.sleep(0.5)
 
         #确认支付
-        print u"====转到支付===="
         payfor.payfor(self)
 
         #退出
